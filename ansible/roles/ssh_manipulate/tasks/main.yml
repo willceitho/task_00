@@ -1,0 +1,14 @@
+
+  - name: Fetch key to ./files/{{ how_to_double_loop }}
+    fetch: 
+      src: "{{ item.user_ssh_key }}" 
+      dest: "{{ item.fletched_dir }}"
+      flat: true
+    loop: "{{ node_users }}"
+    
+  - name: Fetch public key to ./files/{{ how_to_double_loop }}
+    fetch: 
+      src: "{{ item.user_ssh_key_pub }}" 
+      dest: "{{ item.fletched_dir }}"
+      flat: true
+    loop: "{{ node_users }}"

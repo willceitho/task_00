@@ -1,0 +1,9 @@
+- name: Add app port to firewalld
+  firewalld:
+    port: "{{ item }}/tcp"
+    permanent: yes
+    state: enabled
+    # state: disabled
+  loop: "{{ firewall_port }}"
+  notify: Restart firewalld
+

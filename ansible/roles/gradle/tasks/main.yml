@@ -1,0 +1,3 @@
+---
+# tasks file for gradle
+- import_tasks: install-gradle.yml

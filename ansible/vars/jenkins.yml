@@ -1,0 +1,35 @@
+---
+jenkins_plugins:
+  - git
+  - github-api
+  - github-branch-source
+  - gitlab-plugin
+  - gitlab-api
+  - gitlab-oauth
+  - git-client
+
+  - workflow-aggregator
+  - credentials
+  - ssh-slaves
+  - ssh-agent
+  - locale
+  - timestamper
+  - greenballs
+  - matrix-auth
+  - ldap
+  - pam-auth
+  - pipeline-github-lib
+  - ws-cleanup
+
+  - ant
+  - allure-jenkins-plugin
+  - maven-plugin
+  - bouncycastle-api
+  - build-timeout
+  - command-launcher
+  - email-ext
+  - gradle
+  - sonar
+  - jdk-tool
+  - antisamy-markup-formatter
+  - nuget

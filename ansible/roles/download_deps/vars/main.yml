@@ -1,0 +1,15 @@
+# [Dependencies]
+dependency_package_name: 
+  - MySQL-python
+  - git
+  - vim
+  - bash-completion
+  - tree
+  - htop 
+  - wget 
+  - unzip 
+  - curl
+  # - sshpass
+  # - python-pip
+pip_package_name:
+  # - ansible

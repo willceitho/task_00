@@ -1,0 +1,3 @@
+### [path to ssh stuff]
+ans_user_ssh_key: /home/ansible/.ssh/id_ansible_rsa
+jenkins_ssh_dir: /var/lib/jenkins/.ssh/

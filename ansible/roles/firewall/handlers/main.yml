@@ -1,0 +1,13 @@
+---
+- name: Restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+
+# ####    smth new, watch in doc, mb about CENT8 
+
+  # - name: Restart firewalld
+  #   ansible.builtin.service:
+  #     name: firewalld
+  #     state: restarted
+  #   # listen: "restart web services"

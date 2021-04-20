@@ -1,0 +1,24 @@
+---
+
+  - name: Create a ~/.ssh if it does not exist
+    file:
+      path: "{{ item.user_ssh_dir }}"
+      state: directory
+      mode: '0700'
+      owner: "{{ item.username }}"
+      group: "{{ item.username }}"
+    loop: "{{ node_users }}"
+
+  - name: Generate SSH key for user 
+    openssh_keypair:
+      path: "{{ item.user_ssh_key }}"
+      type: "rsa"
+      owner: "{{ item.username }}"
+    loop: "{{ node_users }}"
+
+
+
+
+
+
+

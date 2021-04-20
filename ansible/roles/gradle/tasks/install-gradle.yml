@@ -1,0 +1,47 @@
+---
+# tasks file for gradle
+- name: Checking if Gradle is already installed
+  stat: 
+    path: '{{ gradle_home_parent_directory }}/gradle-{{ gradle_version }}'
+  register: gradle_installed
+
+- name: Downloading Gradle Binaries
+  get_url:
+    url: '{{ gradle_download_url }}'
+    dest: '{{ gradle_home_parent_directory }}/{{ gradle_file_name }}'
+    url_username: '{{ gradle_download_username }}'
+    url_password: '{{ gradle_download_password }}'
+  when: not gradle_installed.stat.exists
+
+- name: Download unzip if needed
+  package:
+    name: unzip
+    state: present
+  when: not gradle_installed.stat.exists
+
+- name: Unarchive Gradle Binaries
+  unarchive:
+    src: '{{ gradle_home_parent_directory }}/{{ gradle_file_name }}'
+    dest: '{{ gradle_home_parent_directory }}'
+    copy: no
+  when: not gradle_installed.stat.exists
+
+- name: Remove old path configuration
+  file:
+    path: /etc/profile.d/gradle.sh
+    state: absent
+
+- name: gradle path configuration
+  lineinfile:
+    dest: /etc/profile.d/gradle.sh
+    line: '{{ item.line }}'
+    create: yes
+    state: present
+  with_items:
+    - { line: 'export PATH=$PATH:{{ gradle_home_parent_directory }}/gradle-{{ gradle_version }}/bin' }
+
+
+- name: Cleaning Up
+  file:
+    state: absent
+    path: '{{ gradle_home_parent_directory }}/{{ gradle_file_name }}'

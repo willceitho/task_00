@@ -1,0 +1,7 @@
+---
+    - name: Install creds for users
+      authorized_key:
+        user: "{{ item.user }}"
+        key: "{{ item.key }}"
+      loop: "{{ auth_users }}"
+      no_log: "{{ auth_users_no_log }}"

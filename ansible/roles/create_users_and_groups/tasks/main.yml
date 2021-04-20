@@ -1,0 +1,27 @@
+---
+
+  - name: Create host groups 
+    group:
+      name: "{{ item.groupname }}"
+      gid: "{{ item.groupid }}"
+      state: present
+    loop: "{{ node_groups }}"
+  
+  - name: Add host users
+    user:
+      name: "{{ item.username }}"
+      uid: "{{ item.uid }}"
+      group: "{{ item.group }}"
+      groups: "{{ item.groups }}"
+      shell: "{{ item.shell }}"
+      home: "{{ item.home }}"
+      state: present
+    loop: "{{ node_users }}"
+
+  - name: Add sudo-groups to sudoers.d
+    template:
+      src: templates/sudoers.j2
+      dest: /etc/sudoers.d/sudogroups
+      validate: 'visudo -cf %s'
+      mode: 0440
+

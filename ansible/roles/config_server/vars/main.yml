@@ -1,0 +1,8 @@
+---
+
+etc_hosts:
+    - { name: ub1.com, ip: 192.168.0.210 }
+    - { name: ub2.com, ip: 192.168.0.211 }
+    # - { name: ansible2.example.com, ip: 192.168.0.152 }
+    # - { name: ansible3.example.com, ip: 192.168.0.161 }
+

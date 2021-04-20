@@ -1,0 +1,16 @@
+- name: Create database user with name 'worker' and password 'qweqweqwE_1' with all database privileges
+  #community.mysql.
+  mysql_user:
+    name: worker
+    password: qweqweqwE_1
+    host: "%"
+    priv: '*.*:ALL'
+    state: present
+- name: Create a new database 
+  #community.mysql.
+  mysql_db:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "test_env"
+    - "prod_db"

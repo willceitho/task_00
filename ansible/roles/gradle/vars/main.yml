@@ -1,0 +1,8 @@
+---
+# defaults file for gradle
+gradle_version: 6.8.2
+gradle_home_parent_directory: /opt
+gradle_file_name: gradle-{{ gradle_version }}-bin.zip
+gradle_download_url: 'https://services.gradle.org/distributions/{{ gradle_file_name }}'
+gradle_download_username: ''
+gradle_download_password: ''

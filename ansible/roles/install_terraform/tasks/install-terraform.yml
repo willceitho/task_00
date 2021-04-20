@@ -1,0 +1,53 @@
+---
+# tasks file for terraform
+- name: Checking if terraform is already installed
+  stat: 
+    path: '{{ terraform_home_parent_directory }}/terraform-{{ terraform_version }}'
+  register: terraform_installed
+
+- name: Downloading terraform Binaries
+  get_url:
+    url: '{{ terraform_download_url }}'
+    dest: '{{ terraform_home_parent_directory }}/{{ terraform_file_name }}'
+    url_username: '{{ terraform_download_username }}'
+    url_password: '{{ terraform_download_password }}'
+  when: not terraform_installed.stat.exists
+
+- name: Download unzip if needed
+  package:
+    name: unzip
+    state: present
+  when: not terraform_installed.stat.exists
+
+- name: Create Terraform homedir
+  file:
+    path: "{{ terraform_home_parent_directory }}/terraform-{{ terraform_version }}"
+    state: directory
+  when: not terraform_installed.stat.exists
+
+- name: Unarchive Terraform Binaries
+  unarchive:
+    src: '{{ terraform_home_parent_directory }}/{{ terraform_file_name }}'
+    dest: '{{ terraform_home_parent_directory }}/terraform-{{ terraform_version }}/'
+    copy: no
+  when: not terraform_installed.stat.exists
+
+- name: Remove old path configuration
+  file:
+    path: /etc/profile.d/terraform.sh
+    state: absent
+
+- name: Terraform path configuration
+  lineinfile:
+    dest: /etc/profile.d/terraform.sh
+    line: '{{ item.line }}'
+    create: yes
+    state: present
+  with_items:
+    - { line: 'export PATH=$PATH:{{ terraform_home_parent_directory }}/terraform-{{ terraform_version }}/' }
+
+
+- name: Cleaning Up
+  file:
+    state: absent
+    path: '{{ terraform_home_parent_directory }}/{{ terraform_file_name }}'

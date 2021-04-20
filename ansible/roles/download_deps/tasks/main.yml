@@ -1,0 +1,21 @@
+---
+
+# - name: Update local packages
+#   package:
+#     name: "*"
+#     state: latest
+
+- name: Install epel-release
+  package:
+    name: epel-release
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: Install deps
+  package:
+    name: "{{ dependency_package_name }}"
+    state: latest
+
+  # - name: pip install packages 
+  #   pip: 
+  #     name: "{{ pip_package_name }}"

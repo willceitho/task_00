@@ -1,0 +1,6 @@
+---
+
+# [Firewall config]
+db_port: 3306
+firewall_port: 
+  - "{{  db_port }}" 

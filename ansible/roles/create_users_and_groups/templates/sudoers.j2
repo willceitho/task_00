@@ -1,0 +1,5 @@
+{% for item in node_groups %}
+{% if item.sudo %}
+{{ item.groupname}} ALL=(ALL:ALL) NOPASSWD: ALL
+{% endif %}
+{% endfor %}

@@ -1,0 +1,46 @@
+---
+# [Users and groups]
+node_groups:
+  - groupname: ansible
+    groupid: 4000
+    sudo: true  
+  - groupname: jenkins
+    groupid: 5000
+    sudo: false
+node_users:
+  - username: ansible
+    uid: 4000
+    group: ansible
+    groups: #docker
+    shell: /bin/bash
+    home: /home/ansible/
+
+    user_ssh_dir: /home/ansible/.ssh/
+    user_ssh_key: /home/ansible/.ssh/id_ansible_rsa
+    user_ssh_key_pub: /home/ansible/.ssh/id_ansible_rsa.pub
+    fletched_dir: files/ansible/
+
+  - username: jenkins
+    uid: 5000
+    group: jenkins
+    groups: 
+    shell: /bin/bash
+    home: /var/lib/jenkins/
+
+    user_ssh_dir: /var/lib/jenkins/.ssh/
+    user_ssh_key: /var/lib/jenkins/.ssh/id_rsa
+    user_ssh_key_pub: /var/lib/jenkins/.ssh/id_rsa.pub
+    fletched_dir: files/jenkins/
+
+auth_users:
+  - user: ansible
+    key: "{{ lookup('file', 'files/ansible/id_ansible_rsa.pub') }}"
+
+# [Firewall config]
+jenkins_http_port: 8888
+tomcat_port: 8877
+db_port: 3306
+
+firewall_port: 
+  - "{{ jenkins_http_port }}"
+  - "{{ db_port }}"

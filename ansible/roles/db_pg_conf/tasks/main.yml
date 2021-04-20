@@ -1,0 +1,12 @@
+- name: Create a new database with name "acme"
+  # community.general.
+  postgresql_db:
+    name: acme
+- name: Connect to acme database, create django user, and grant access to database and products table
+  # community.general.
+  postgresql_user:
+    db: acme
+    name: django
+    password: ceec4eif7ya
+    priv: "ALL/*:ALL"
+    expires: "Jan 31 2022"

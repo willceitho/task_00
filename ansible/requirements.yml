@@ -1,0 +1,15 @@
+---
+# ansible-galaxy install --role-file=requirements.yml --roles-path=roles --force
+  - src: geerlingguy.docker
+  # - src: geerlingguy.java
+  # - src: geerlingguy.jenkins
+  # - src: geerlingguy.nginx
+  # - src: geerlingguy.postgresql
+  # - src: lrk.sonarqube
+  # - src: geerlingguy.mysql
+  # - src: myuser@github.com/my-project/search-mysql
+  # - src: https://github.com/tecris/ansible-maven
+  #   version: master
+  #   name: ansible-maven
+  #   path: ./roles
+

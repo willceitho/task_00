@@ -1,0 +1,4 @@
+    - name: ensure sho u menya est' inet
+      lineinfile:
+        path: /etc/resolv.conf
+        line: nameserver 8.8.8.8
