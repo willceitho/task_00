@@ -1,0 +1,42 @@
+- set_fact: "app_major_version={{ app_version.split('.')[0] }}.x"
+  when:
+      - app_major_version is undefined
+
+# read bout a yum-version-lock | ref: https://github.com/elastic/ansible-elasticsearch/blob/master/tasks/elasticsearch-RedHat-version-lock.yml
+- name: Set the defaults here otherwise they can't be overriden in the same play if the role is called twice
+  set_fact:
+    app_repo_name: "{{ app_major_version }}"
+    app_package_name: "elasticsearch"
+
+- name: RedHat - add Elasticsearch repo
+  become: yes
+  template:
+    src: '{{ app_package_name }}.repo'
+    dest: '/etc/yum.repos.d/{{ app_package_name }}-{{ app_repo_name }}.repo'
+
+- name: install Elasticsearch
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - "elasticsearch"
+    - "kibana"
+    # - "filebeat" 
+
+- name: Enable and start  Elasticsearch and Kibana
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - "elasticsearch"
+    - "kibana"
+
+- name: Ensure kibana configured
+  lineinfile:
+    path: /etc/kibana/kibana.yml
+    line: 'server.host: "0.0.0.0"'
+
+
+# /etc/kibana/kibana.yml 
+# server.host: "0.0.0.0"

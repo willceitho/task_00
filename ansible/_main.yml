@@ -6,15 +6,8 @@
     - vars/jenkins.yml
     - vars/java.yml
   roles:
-    - config_server
-    # - install_terraform
-#     - geerlingguy.java
-#     - tomcat
-#     - maven
-#     - geerlingguy.mysql
-#     - db_conf
-#     - resolv
-#     - download_deps
+    - es_reverse
+
 
 #     #### Users and ssh-keys
     # - create_users_and_groups
@@ -24,7 +17,7 @@
 
 #     - geerlingguy.java
 #     - geerlingguy.jenkins
-#     - firewall
+    - firewall
 
 # - name: Config workers
 #   hosts: workers
