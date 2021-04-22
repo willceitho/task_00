@@ -8,15 +8,12 @@
   # - src: geerlingguy.nginx
   # - src: geerlingguy.postgresql
   # - src: geerlingguy.mysql
-
-  
   # - src: lrk.sonarqube
-  - src: elastic.elasticsearch
+  # - src: elastic.elasticsearch
 
 
 
 
-  # - src: myuser@github.com/my-project/search-mysql
   # - src: https://github.com/tecris/ansible-maven
   #   version: master
   #   name: ansible-maven

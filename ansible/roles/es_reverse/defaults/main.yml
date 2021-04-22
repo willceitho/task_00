@@ -1,5 +1,9 @@
 ---
 app_version: "7.12.0"
+cluster_name: "my_cluster"
+kibana_server_bind : "0.0.0.0"
+ki_cfg_dest_yml: "/etc/kibana/kibana.yml"
+es_cfg_dest_yml: "/etc/elasticsearch/elasticsearch.yml"
 # es_use_snapshot_release: false
 # oss_version: false
 # es_package_name: "elasticsearch"

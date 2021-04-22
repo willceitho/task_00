@@ -9,7 +9,6 @@
     app_package_name: "elasticsearch"
 
 - name: RedHat - add Elasticsearch repo
-  become: yes
   template:
     src: '{{ app_package_name }}.repo'
     dest: '/etc/yum.repos.d/{{ app_package_name }}-{{ app_repo_name }}.repo'
@@ -32,10 +31,22 @@
     - "elasticsearch"
     - "kibana"
 
-- name: Ensure kibana configured
-  lineinfile:
-    path: /etc/kibana/kibana.yml
-    line: 'server.host: "0.0.0.0"'
+- name: elasticsearch cfg
+  template:
+    src: 'templates/elasticsearch.yml'
+    dest: '{{ es_cfg_dest_yml }}'
+
+- name: kibana cfg
+  template:
+    src: 'templates/kibana.yml'
+    dest: '{{ ki_cfg_dest_yml }}'
+
+# - name: Ensure kibana configured
+#   lineinfile:
+#     path: /etc/kibana/kibana.yml
+#     line: 'server.host: "0.0.0.0"'
+
+
 
 
 # /etc/kibana/kibana.yml 
