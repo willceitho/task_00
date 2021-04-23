@@ -4,6 +4,7 @@ asdasd
 #### Table of Contents
 
 1. [About][About]
+2. [Inst][Inst]
 
 
 d
@@ -68,6 +69,8 @@ apply to nodes in a cluster
 for example nodes are members of
 
 a cluster that share a common goal
+
+## Inst
 
 now nodes are distributed across
 
