@@ -3,7 +3,7 @@ asdasd
 
 #### Table of Contents
 
-1. [About Elasticsearch][About Elasticsearch]
+1. [About][About]
 2. [Installation][Installation]
 3. [Documentation][Documentation]
 4. [Support][Support]
@@ -11,7 +11,7 @@ asdasd
 6. [Contributing][Contributing]
 
 
-## About Elasticsearch
+## About
 
 Elasticsearch is is a powerful search and analytics engine it's known for its distributed nature, speed and scalability - and this is due to its unique architecture.
 
