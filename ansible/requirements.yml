@@ -10,11 +10,15 @@
   # - src: geerlingguy.mysql
   # - src: lrk.sonarqube
   # - src: elastic.elasticsearch
+  # - src: icinga.icinga2
 
 
 
 
   # - src: https://github.com/tecris/ansible-maven
+
+  # icinga playbook download didn't work: not galaxy, not github((
+  # - src: https://github.com/Icinga/ansible-icinga2
   #   version: master
   #   name: ansible-maven
   #   path: ./roles

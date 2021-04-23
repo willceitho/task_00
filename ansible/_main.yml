@@ -14,7 +14,8 @@
 
 #     - geerlingguy.java
 #     - geerlingguy.jenkins
-    - es_reverse
+    # - es_reverse
+    - install_icinga2
     - firewall
 
 # - name: Config workers
