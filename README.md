@@ -1,5 +1,3 @@
-https://youtu.be/gS_nHTWZEJ8
-
 # elasticsearch crush course cheto-tam
 
 #### Table of Contents
