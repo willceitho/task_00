@@ -4,11 +4,7 @@ asdasd
 #### Table of Contents
 
 1. [About][About]
-2. [Installation][Installation]
-3. [Documentation][Documentation]
-4. [Support][Support]
-5. [License][License]
-6. [Contributing][Contributing]
+
 
 
 ## About
