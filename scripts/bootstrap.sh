@@ -3,7 +3,7 @@ sudo yum update -y && sudo yum install -y epel-release
 sudo yum clean all && sudo yum clean metadata
 
 sudo yum install -y \
-git vim zsh \
+git vim zsh htop \
 ansible python3 python3-pip 
 
 # install oh-my-zsh
