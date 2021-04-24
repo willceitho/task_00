@@ -1,17 +1,12 @@
 # Elasticsearch crush course cheto-tam
-asdasd
 
 #### Table of Contents
 
 
-1. [About][About]
-2. [Inst][Inst]
+1. [Basic architecture][Basic architecture]
+2. [What is Sharding?][What is Sharding?]
 
-
-d
-
-
-## About
+## Basic architecture
 
 Elasticsearch is is a powerful search and analytics engine it's known for its distributed nature, speed and scalability - and this is due to its unique architecture.
 
@@ -21,348 +16,120 @@ once elastic elasticsearch is up and running you now have an instance of elastic
 
 ---
 
-when you start up a node a cluster
+When you start up a node a cluster is formed automatically and you could have one to many nodes in a cluster and these nodes are distributed across separate machines, but they all belong to the same cluster and work together to accomplish a task
 
-is formed automatically
+Let's really bring this concept home: think about a team that you have been a part of. Your team consists of multiple members who all work together to accomplish a common goal, and your team could divide and conquer by assigning each member one or multiple roles, and these are the roles that you're going to specialize in. 
 
-and you could have one to many nodes in
+![](pics/03_cluster0.png)
 
-a cluster
+Now your team members may work in different buildings, but you all still belong to the same team - and this analogy could directly apply to nodes in a cluster.
 
-and these nodes are distributed across
+for example nodes are members of a cluster that share a common goal. Now nodes are distributed across separate machines, but they're still part of the same cluster. nodes are assigned to one or multiple roles,
 
-separate machines
+![](pics/03_cluster1.png)
 
-but they all belong to the same cluster
+And one of the roles that could be assigned to is to **hold data**, and that is what we'll be focusing on today.
 
-and work together to accomplish a task
+---
 
-so let's really bring this concept home
+*Data* is stored as **documents**. A document is a json object that contains whatever data you want to store in elasticsearch
 
-so think about a team that you have been
+let's go to online grocery shop example. We're helping our customers search for grocery items online, so we need to store grocery data in elasticsearch. A document for one grocery item would look like this:
 
-a part of
+![](pics/04_doc.png)
 
-your team consists of multiple members
+A json object contains the name of the product, category belongs in, its brand and price
 
-who all work together to accomplish a
+Things are much easier to find when you group them in a logical manner. Documents that share similar traits, and are logically related to each other, are grouped into an index.
 
-common goal
+![](pics/05_group.png)
 
-and your team could divide and conquer
+So for example documents of clementines and carrots would be grouped under produce index; documents of malbecs and ipas would be grouped under wine and beer index. To sum it up, *indexes are used to group documents that are related to each other*
 
-by assigning each member
+## What is Sharding? 
 
-one or multiple roles and these
+Here we have a cluster of nodes. We have a *produce index* and *wine and beer index* 
 
-are the roles that you're going to
+![](pics/06_.png)
 
-specialize in now your team members may
+Index is not actually storing documents, it's just a virtual thing that keeps track of where documents are stored. You can't find index on disk. What actually exists on disk is a **shard**. Shard is where data is stored, and *this is where you run a search*.
 
-work in different buildings
+![](pics/07_shard.png)
 
-but you all still belong to the same
+---
 
-team and this analogy could directly
+When you create an index one shard comes with it by default, and you can configure it so that you can create an index with multiple shards that are distributed across nodes - this is a practice called sharding, and there are a lot of super powers that come with this practice
 
-apply to nodes in a cluster
+![](pics/07_sharding.png)
 
-for example nodes are members of
+---
 
-a cluster that share a common goal
+Imagine you have a cluster and you want to create a produce index that will keep track of all produce documents. When you create an index, one shard is created by default, and the shard is assigned to a node
 
-## Inst
+![](pics/08_1.png)
 
-now nodes are distributed across
+> remember: shard is where documents are stored, and number of documents a shard could hold depends on the capacity of the node
 
-separate machines
+Let's say you want to index 600 000 documents in your produce index, but the node where the shard is assigned to could only hold 200 000 documents. Well, that's not gonna work right. What we do have two more nodes which could hold 200 000 documents each; so what you can do is you can add two additional shard in the index and distribute them across these nodes. Each chart could hold two hundred thousand documents, so together they hold six hundred thousand documents. 
 
-but they're still part of the same
+![](pics/08_2.png)
 
-cluster
+---
 
-nodes are assigned to one or multiple
+That is all fine and dandy, but our produce data is only going to grow, so how are we going to adapt to increasing data? 
 
-roles
 
-and one of the roles that i know it
-
-could be assigned to is to hold
-
-data and that is what we'll be focusing
-
-on today
-
-so data is stored as documents
-
-in a document is a json object that
-
-contains whatever
-
-data you want to store in elasticsearch
-
-so let's go back to our online grocery
-
-shop example
-
-now we're helping our customers search
-
-for grocery items online
-
-so we need to store grocery data in
-
-elasticsearch
-
-now a document for one grocery item
-
-would look like this
-
-so in a json object it contains the name
-
-of the product
-
-category belongs in its brand and price
-
-and things are much easier to find when
-
-you group them in a logical manner
-
-and documents that share similar traits
-
-and are logically related to each other
-
-are grouped into an index so for example
-
-documents of clementines and carrots
-
-would be grouped under produce index
-
-documents of malbecs and ipas would be
-
-grouped under
-
-wine and beer index so to sum it up
-
-indices are used to group documents that
-
-are related to each other
-
-so we know where to find certain
-
-information
-
-okay so let's delve into this a little
-
-bit more
-
-so here we have a cluster of nodes we
-
-have a produce index
-
-and wine and beer index now index
-
-is not actually storing documents it's
-
-just a
-
-virtual thing that keeps track of where
-
-documents are stored now you can't find
-
-index on disk
-
-what actually exists on disk is a shard
-
-so shard is where data is stored
-
-and this is where you run a search
-
-so when you create an index one chart
-
-comes with it by default
-
-and you can configure it so that you can
-
-create an index with
-
-multiple charts that are distributed
-
-across nodes
-
-and this is a practice called sharding
-
-and there are a lot of super powers that
-
-come with this practice
-
-so let's say you have a cluster that
-
-looks like this and you want to create a
-
-produce index
-
-that will keep track of all produce
-
-documents
-
-now when you create an index one chart
-
-is created by default
-
-and the shard is assigned to a node
-
-and remember shard is where documents
-
-are stored
-
-and number of documents a shark could
-
-hold depends on the capacity of the node
-
-let's say you want to index 600 000
-
-documents in your produce index
-
-but the node where the chart is assigned
-
-to could hold
-
-only hold 200 000 documents
-
-well that's not gonna work right well we
-
-do have two more nodes
-
-which could hold 200 000 documents each
-
-so what you can do is you can add two
-
-additional charts
-
-in the index and distribute them across
-
-these nodes
-
-and each chart could hold two hundred
-
-thousand documents
-
-so together they hold six hundred
-
-thousand documents
-
-now that is all fine and dandy but our
-
-produce data is only going to grow so
-
-how are we going to adapt to increasing
-
-data now that
-
-is the beauty of sharding so you could
-
-add more shards and nodes as the needle
-
+now that is the beauty of sharding so you could add more shards and nodes as the needle
 rises
-
 so you could horizontally scale and
-
 adapt to increasing data
-
 but that's not the only superpower that
-
 comes with charting
-
 now remember shard is where you store
-
 documents
-
 and it's also where you run search
-
 queries
-
 so let's talk about a scenario where the
-
 client is sending a search request
-
 for pink lady apples now in this
-
 in this scenario you have one chart in a
-
 node
-
 that could hold the entire produce index
-
 now let's say this produce index keeps
-
 track of
-
 500 000 documents and we're going to run
-
 a search
-
 in the single shard meaning we'll go
-
 through
-
 500 000 documents sequentially
-
 now let's say it takes you 10 seconds to
-
 do that
-
 now this time we're going to run the
-
 same search with a different setup
-
 so we'll have 10 charts distributed
-
 across 10 nodes
-
 and we'll distribute 500 000 documents
-
 across
-
 10 charts so that each shard
-
 holds 50 000 documents each
-
 now in the previous scenario it took us
-
 10 seconds to sequentially search
-
 through 500 000 documents
-
 and if you do the math running a search
-
 on 50 000 documents
-
 should take one second
-
 now what's so cool about this setup is
-
 that you could run a search
-
 on all 10 of these charts at the same
-
 time
-
 in parallel now guess how long it takes
-
 to search through
-
 500 thousand documents with this setup
-
 one second so as you can see sharding
-
 could really speed up your search
-
 now in the first case onenote had to
-
 store all the info
-
 and process all incoming search with
-
 this setup
 
 we could only store as much data and
