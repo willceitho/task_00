@@ -41,6 +41,9 @@ jenkins_http_port: 8888
 tomcat_port: 8877
 db_port: 3306
 kibana_port: 5601
+firewall_services:
+  - "elasticsearch"
+  - "kibana"
 
 firewall_port: 
   # - 9200

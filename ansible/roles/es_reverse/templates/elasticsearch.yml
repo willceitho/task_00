@@ -14,13 +14,14 @@
 #
 # Use a descriptive name for your cluster:
 #
-cluster.name: {{ cluster_name}}
+cluster.name: {{ cluster_name }}
 #
 # ------------------------------------ Node ------------------------------------
 #
 # Use a descriptive name for the node:
 #
 #node.name: node-1
+node.name: {{ inventory_hostname }}
 #
 # Add custom attributes to the node:
 #

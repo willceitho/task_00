@@ -1,0 +1,18 @@
+---
+
+- name: start stack
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop: "{{ stack }}"
+
+- name: restart elasticsearch
+  systemd:
+    name: elasticsearch
+    state: restarted
+
+- name: restart kibana
+  systemd:
+    name: kibana
+    state: restarted

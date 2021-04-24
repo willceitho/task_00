@@ -4,6 +4,13 @@ cluster_name: "my_cluster"
 kibana_server_bind : "0.0.0.0"
 ki_cfg_dest_yml: "/etc/kibana/kibana.yml"
 es_cfg_dest_yml: "/etc/elasticsearch/elasticsearch.yml"
+stack:
+    - "elasticsearch"
+    - "kibana"
+    # - "metricbeat"
+    # - "filebeat" 
+
+
 # es_use_snapshot_release: false
 # oss_version: false
 # es_package_name: "elasticsearch"
