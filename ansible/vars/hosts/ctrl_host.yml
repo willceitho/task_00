@@ -44,6 +44,7 @@ kibana_port: 5601
 firewall_services:
   - "elasticsearch"
   - "kibana"
+  - "http"
 
 firewall_port: 
   # - 9200

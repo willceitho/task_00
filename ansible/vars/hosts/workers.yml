@@ -22,5 +22,9 @@ node_groups:
 # [Firewall config]
 tomcat_port: 8999
 
-firewall_port: 
-  - "{{ tomcat_port }}"
+# firewall_port: 
+#   - "{{ tomcat_port }}"
+
+firewall_services:
+  - "http"
+  - "https"

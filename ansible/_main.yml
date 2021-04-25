@@ -12,29 +12,23 @@
     # - ssh_manipulate
     # - install_creds
 
-#     - geerlingguy.java
-#     - geerlingguy.jenkins
     - es_reverse
     - install_icinga2
+    - install_nginx
     - firewall
 
-# - name: Config workers
-#   hosts: workers
-#   vars_files:
-#     - vars/hosts/workers.yml
-#     - vars/java.yml
-#   roles:
-#     - resolv
-#     - download_deps
-
+- name: Config workers
+  hosts: workers
+  vars_files:
+    - vars/hosts/workers.yml
+    # - vars/java.yml
+  roles:
 #     ###### Users and ssh-keys
 #     - create_users_and_groups
 #     - install_creds
     
-#     - geerlingguy.java
-#     - tomcat
-#     - maven
-#     - firewall
+    - install_nginx
+    - firewall
 
 # - name: Config db
 #   hosts: db
@@ -42,7 +36,3 @@
 #     - vars/hosts/db.yml
 #   roles:
 #     - resolv
-#     - download_deps
-#     - geerlingguy.mysql
-#     - db_conf
-#     - firewall

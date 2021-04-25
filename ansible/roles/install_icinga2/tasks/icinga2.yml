@@ -1,7 +1,7 @@
 ---
-- name: Include specific Icinga 2
-  include: icinga2-Debian.yml
-  when: ansible_os_family == 'Debian'
+# - name: Include specific Icinga 2
+#   include: icinga2-Debian.yml
+#   when: ansible_os_family == 'Debian'
 
 - name: Include specific Icinga 2
   include: icinga2-RedHat.yml
