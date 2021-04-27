@@ -1,0 +1,11 @@
+curl -X GET "http://192.168.0.201:9200/_cluster/health?pretty"
+curl -X GET "http://192.168.0.201:9200/_cat/master?pretty"
+
+
+GET _cluster/health
+
+GET _cat/master
+
+GET _nodes?filter_path=**.mlockall
+
+GET _nodes/stats/process?filter_path=**.max_file_descriptors

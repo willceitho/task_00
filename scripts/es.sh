@@ -22,16 +22,30 @@ type=rpm-md
 EOF
 }
 
-cat > file <<EOF
-`(node_ip)`
-EOF
-
 # Vars
-node_roles="$1"
+echo -n 'Specify node role (if many, use "master, data"): '
+read node_roles
 app=elasticsearch
+
 # Install ES and config 
 elastic_repo
 yum install -y --enablerepo=elasticsearch $app 
+
+swapoff -a
+sudo sed -i '/ swap / s/^/#/' /etc/fstab
+
+mkdir /etc/systemd/system/elasticsearch.service.d/
+cat > /etc/systemd/system/elasticsearch.service.d/override.conf <<EOF
+[Service]
+LimitMEMLOCK=infinity
+EOF
+
+cat > /etc/$app/unicast_hosts.txt <<EOF
+192.168.0.201
+192.168.0.202
+192.168.0.210
+EOF
+
 cat > /etc/$app/$app.yml <<EOF
 # ------------------------------------ Node ------------------------------------
 node.name: `(node_ip)`
@@ -41,14 +55,20 @@ network.host: `(node_ip)`
 http.port: 9200
 # ---------------------------------- Cluster -----------------------------------
 cluster.name: es_cluster
-cluster.initial_master_nodes: ["192.168.0.201","192.168.0.210"]
+cluster.initial_master_nodes: ["192.168.0.201","192.168.0.202"]
 # --------------------------------- Discovery ----------------------------------
-discovery.seed_hosts: ["192.168.0.201","192.168.0.210"]
+#discovery.seed_hosts: ["192.168.0.201","192.168.0.202"]
+discovery.seed_providers: file
 # ----------------------------------- Paths ------------------------------------
 path.data: /var/lib/`(echo $app)`
 path.logs: /var/log/`(echo $app)`
-#bootstrap.memory_lock: true
+# ----------------------------------- Other ------------------------------------
+bootstrap.memory_lock: true
 EOF
+
+
 systemctl daemon-reload
+systemctl stop firewalld.service
+systemctl disable firewalld.service
 systemctl enable $app.service
 systemctl start $app.service
