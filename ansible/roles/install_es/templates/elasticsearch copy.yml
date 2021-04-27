@@ -15,6 +15,7 @@
 # Use a descriptive name for your cluster:
 #
 cluster.name: {{ cluster_name }}
+cluster.initial_master_nodes: ["192.168.0.201","192.168.0.210"]
 #
 # ------------------------------------ Node ------------------------------------
 #
@@ -22,6 +23,7 @@ cluster.name: {{ cluster_name }}
 #
 #node.name: node-1
 node.name: {{ inventory_hostname }}
+# node.roles: [ master, data ]
 #
 # Add custom attributes to the node:
 #
@@ -54,7 +56,7 @@ path.logs: /var/log/elasticsearch
 # By default Elasticsearch is only accessible on localhost. Set a different
 # address here to expose this node on the network:
 #
-#network.host: 192.168.0.1
+network.host: 192.168.0.201
 #
 # By default Elasticsearch listens for HTTP traffic on the first free port it
 # finds starting at 9200. Set a specific HTTP port here:

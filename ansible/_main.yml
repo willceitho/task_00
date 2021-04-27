@@ -3,8 +3,6 @@
   hosts: ctrl_host
   vars_files:
     - vars/hosts/ctrl_host.yml
-    # - vars/jenkins.yml
-    # - vars/java.yml
   roles:
     #     #### Users and ssh-keys
     # - create_users_and_groups
@@ -12,8 +10,8 @@
     # - ssh_manipulate
     # - install_creds
 
-    - es_reverse
-    - install_icinga2
+    - install_es
+    # - install_icinga2
     - install_nginx
     - firewall
 
@@ -21,18 +19,9 @@
   hosts: workers
   vars_files:
     - vars/hosts/workers.yml
-    # - vars/java.yml
   roles:
-#     ###### Users and ssh-keys
-#     - create_users_and_groups
-#     - install_creds
-    
+
+    - swapoff
+    - install_es
     - install_nginx
     - firewall
-
-# - name: Config db
-#   hosts: db
-#   vars_files:
-#     - vars/hosts/db.yml
-#   roles:
-#     - resolv

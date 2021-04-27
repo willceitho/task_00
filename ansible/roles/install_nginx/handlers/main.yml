@@ -5,14 +5,3 @@
     name: nginx
     state: started
     enabled: yes
-  # loop: "{{ stack }}"
-
-- name: restart elasticsearch
-  systemd:
-    name: elasticsearch
-    state: restarted
-
-- name: restart kibana
-  systemd:
-    name: kibana
-    state: restarted
