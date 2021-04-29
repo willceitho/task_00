@@ -1,0 +1,24 @@
+---
+
+- name: install filebeat
+  yum:
+    name: "filebeat"
+    state: latest
+
+# - name: Place custom config into /etc/filebeat/filebeat.yml
+#   copy:
+#     src: 'files/filebeat/filebeat.yml'
+#     dest: '/etc/filebeat/filebeat.yml'
+#   notify: restart filebeat
+
+- name: Place custom config into {{ ki_cfg_dest_yml }}
+  template:
+    src: 'templates/filebeat.yml'
+    dest: '/etc/filebeat/filebeat.yml'
+  notify: restart filebeat
+  
+- name: Place custom config into /etc/filebeat/modules.d/nginx.yml
+  copy:
+    src: 'files/filebeat/nginx.yml'
+    dest: '/etc/filebeat/modules.d/nginx.yml'
+  notify: restart filebeat

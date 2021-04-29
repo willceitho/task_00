@@ -1,0 +1,15 @@
+- name: Make sure destination dir exists
+  file:
+    path: "{{ sysd_config_file | dirname }}"
+    state: directory
+    mode: "755"
+
+- name: Copy specific Elasticsearch systemd config file
+  copy:
+    src: "files/systemd/elasticsearch_override.conf"
+    dest: "{{ sysd_config_file }}"
+    owner: root
+    mode: "644"
+    force: yes
+  notify:
+    - restart elasticsearch

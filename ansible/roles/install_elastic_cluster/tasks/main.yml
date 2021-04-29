@@ -1,0 +1,21 @@
+---
+####### Prepare Centos VMs for Stack install
+
+- import_tasks: es_repo_key.yml
+- import_tasks: swapoff.yml
+- import_tasks: stop_firewalld.yml
+
+
+####### install cluster
+
+- import_tasks: elastic.yml
+  when: install_elasticsearch |bool
+
+- import_tasks: kibana.yml
+  when: install_kibana |bool
+
+- import_tasks: logstash.yml
+  when: install_logstash |bool
+
+- import_tasks: filebeat.yml
+  when: install_filebeat |bool

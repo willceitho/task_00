@@ -1,0 +1,5 @@
+---
+- name: RedHat - add Elasticsearch repo
+  template:
+    src: 'elasticsearch.repo'
+    dest: '/etc/yum.repos.d/elasticsearch.repo'

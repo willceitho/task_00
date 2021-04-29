@@ -1,0 +1,22 @@
+# ------------------------------------ Node ------------------------------------
+{% if node_roles == 'data' %}
+node.name: data
+{% elif node_roles == 'master' %}
+node.name: master
+{% else %}
+node.name: coordinator
+{% endif %}
+
+node.roles:  [ {{ node_roles }} ]
+# ---------------------------------- Network -----------------------------------
+network.host: {{ inventory_hostname }}
+http.port: {{ es_http_port }}
+# ---------------------------------- Cluster -----------------------------------
+cluster.name: {{ cluster_name }}                                             
+cluster.initial_master_nodes: [ {{ cluster_init_master_nodes }} ]
+# --------------------------------- Discovery ----------------------------------
+discovery.seed_hosts:  {{ discovery_seed_hosts | to_json }}  
+# ----------------------------------- Paths ------------------------------------
+path.data: {{ es_data_path }}
+path.logs: {{ es_logs_path }}
+

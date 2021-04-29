@@ -63,7 +63,6 @@ discovery.seed_providers: file
 path.data: /var/lib/`(echo $app)`
 path.logs: /var/log/`(echo $app)`
 # ----------------------------------- Other ------------------------------------
-bootstrap.memory_lock: true
 EOF
 
 

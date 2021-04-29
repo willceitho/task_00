@@ -1,0 +1,5 @@
+output.logstash:
+  hosts: ["192.168.0.202:5044"]
+# output.elasticsearch:
+#   hosts: ["http://192.168.0.201:9200"]
+filebeat.config.modules.path: /etc/filebeat/modules.d/*.yml

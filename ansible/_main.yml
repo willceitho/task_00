@@ -3,6 +3,13 @@
   hosts: ctrl_host
   vars_files:
     - vars/hosts/ctrl_host.yml
+  vars:
+    install_elasticsearch: true
+    install_kibana: false
+    install_logstash: false
+    install_filebeat: false
+    node_roles: "master"
+    
   roles:
     #     #### Users and ssh-keys
     # - create_users_and_groups
@@ -10,18 +17,42 @@
     # - ssh_manipulate
     # - install_creds
 
-    - install_es
+    - install_elastic_cluster
     # - install_icinga2
-    - install_nginx
-    - firewall
+    # - install_nginx
+    # - firewall
 
-- name: Config workers
-  hosts: workers
-  vars_files:
-    - vars/hosts/workers.yml
+- name: Config data nodes
+  hosts: data
+  vars:
+    install_elasticsearch: true
+    install_kibana: true
+    install_logstash: false
+    install_filebeat: false
+    node_roles: "data"
   roles:
+    - install_elastic_cluster
 
-    - swapoff
-    - install_es
+- name: Config coordinator nodes
+  hosts: coordinator
+  vars:
+    install_elasticsearch: true
+    install_kibana: false
+    install_logstash: true
+    install_filebeat: false
+    node_roles: ""
+    
+  roles:
+    - install_elastic_cluster
+
+- name: Config nginx
+  hosts: nginx
+  vars:
+    install_elasticsearch: false
+    install_kibana: false
+    install_logstash: false
+    install_filebeat: true
+    node_roles: ""
+  roles:
     - install_nginx
-    - firewall
+    - install_elastic_cluster

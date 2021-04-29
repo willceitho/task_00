@@ -1,0 +1,12 @@
+---
+
+- name: install Logstash
+  yum:
+    name: "logstash"
+    state: latest
+
+- name: Place custom config into /etc/logstash/conf.d/logstash.conf
+  copy:
+    src: 'files/logstash/logstash.conf'
+    dest: '/etc/logstash/conf.d/logstash.conf'
+  notify: restart logstash

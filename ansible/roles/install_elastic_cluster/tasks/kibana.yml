@@ -1,0 +1,12 @@
+---
+
+- name: install Kibana
+  yum:
+    name: "kibana"
+    state: latest
+
+- name: Place custom config into {{ ki_cfg_dest_yml }}
+  template:
+    src: 'templates/kibana.yml'
+    dest: '{{ ki_cfg_dest_yml }}'
+  notify: restart kibana
