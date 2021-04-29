@@ -1,8 +1,8 @@
 ---
-- name: Config Control Host
-  hosts: ctrl_host
-  vars_files:
-    - vars/hosts/ctrl_host.yml
+- name: Config master nodes
+  hosts: master
+  # vars_files:
+  #   - vars/hosts/ctrl_host.yml
   vars:
     install_elasticsearch: true
     install_kibana: false
