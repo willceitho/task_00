@@ -1,5 +1,13 @@
 ---
-- name: RedHat - add Elasticsearch repo
-  template:
-    src: 'elasticsearch.repo'
-    dest: '/etc/yum.repos.d/elasticsearch.repo'
+# - name: RedHat - add Elasticsearch repo
+#   template:
+#     src: 'elasticsearch.repo'
+#     dest: '/etc/yum.repos.d/elasticsearch.repo'
+
+- name: RedHat - Elasticsearch repository
+  yum_repository:
+    name: elasticsearch
+    description: "Elasticsearch repository for {{ version }} packages"
+    baseurl: "https://artifacts.elastic.co/packages/{{ version }}/yum"
+    gpgkey: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    gpgcheck: yes
