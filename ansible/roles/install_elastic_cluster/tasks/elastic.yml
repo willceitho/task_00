@@ -6,11 +6,6 @@
     state: latest
 
 - import_tasks: override_systemctl.yml
+- import_tasks: config_elasticsearch.yml
 
-- name: Place custom config into {{ es_cfg_dest_yml }}
-  template:
-    src: 'templates/elasticsearch.yml'
-    # dest: '{{ es_cfg_dest_yml | dirname }}/elasticsearch.yml'
-    dest: '{{ es_cfg_dest_yml }}'
-  notify: restart elasticsearch
 
