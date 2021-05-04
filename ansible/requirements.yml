@@ -7,7 +7,7 @@
   # - src: geerlingguy.jenkins
   # - src: geerlingguy.nginx
   # - src: geerlingguy.postgresql
-  # - src: geerlingguy.mysql
+  - src: geerlingguy.mysql
   # - src: lrk.sonarqube
   # - src: elastic.elasticsearch
   # - src: icinga.icinga2
