@@ -2,6 +2,12 @@
 version: "7.x"
 
 ### ES
+
+#### Repo 
+es_baseurl: "https://artifacts.elastic.co/packages/{{ version }}/yum"
+es_gpgkey: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+
+
 es_http_port: 9200
 cluster_init_master_nodes:  "192.168.0.210"
 discovery_seed_hosts: 

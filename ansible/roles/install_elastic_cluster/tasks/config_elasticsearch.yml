@@ -1,0 +1,6 @@
+- name: Place custom config into {{ es_cfg_dest_yml }}
+  template:
+    src: 'templates/elasticsearch.yml'
+    # dest: '{{ es_cfg_dest_yml | dirname }}/elasticsearch.yml'
+    dest: '{{ es_cfg_dest_yml }}'
+  notify: restart elasticsearch
